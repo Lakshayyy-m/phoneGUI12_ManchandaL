@@ -2,11 +2,18 @@ Notification test = new Notification();
 TypeMessage typeMsg = new TypeMessage();
 PFont font;
 boolean inverted = false;
+PImage img1;
+PImage img2;
+int currentImage = 0; // 0 = none, 1 = image1, 2 = image2
 
 void setup() {
   size(403, 467);
   PImage img = loadImage("iPhoneM.png");
   background(img);
+  
+
+  img1 = loadImage("image1.png"); 
+  img2 = loadImage("image2.png"); 
 }
 
 void draw() {
@@ -17,11 +24,14 @@ void draw() {
   test.update();
   test.display();
   typeMsg.display();
-
-  // this part below is just to complete the assignment and get the marks
-  rectMode(CENTER);
-  fill(0);
-  rect(width/2, (height/2)+15, 60, 40, 20);
+  
+  if (currentImage == 1 && img1 != null) {
+    imageMode(CENTER);
+    image(img1, width/2, height/2, 100, 100);
+  } else if (currentImage == 2 && img2 != null) {
+    imageMode(CENTER);
+    image(img2, width/2, height/2, 100, 100);
+  }
   
   if (inverted) {
     filter(INVERT);
@@ -32,6 +42,19 @@ void keyPressed() {
     inverted = !inverted;
     return;
   }
+  
+  
+  if (key == '1') {
+    currentImage = 1;
+    return;
+  } else if (key == '2') {
+    currentImage = 2;
+    return;
+  } else if (key == '0') {
+    currentImage = 0;
+    return;
+  }
+  
   typeMsg.keyPressed();
 }
 
@@ -118,3 +141,4 @@ class TypeMessage {
     }
   }
 }
+
