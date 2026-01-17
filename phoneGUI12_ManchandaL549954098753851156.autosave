@@ -1,0 +1,61 @@
+Notification test = new Notification();
+void setup(){
+  size(403, 467);
+  PImage img = loadImage("iPhoneM.png");
+  background(img);
+}
+
+void draw(){
+  PImage img = loadImage("iPhoneM.png");
+  background(img);
+
+  test.update();
+  test.display();
+}
+
+
+class Notification {
+  float x = 10;
+  float y;               
+  float startY = -100;   
+  float targetY = 10;    
+  float speed = 6;
+  color bg = color(247, 246, 247, 240);
+  String title = "New Message";
+  String message = "Hey! This is a notification.";
+  
+  Notification(){
+    y = startY;
+  }
+  
+  void display(){
+    fill(bg);
+    stroke(0, 20);   // black, very light (alpha 0–255)
+    strokeWeight(1);
+    rect(x, y, 380, 90, 20);
+    
+    fill(80);
+    textSize(20);
+    text(title, x+15, y+35);
+    
+    fill(0);
+    textSize(12);
+    text(message, x+15, y+55);
+
+}
+  
+  void update(){
+    animateIn();
+  }
+  
+  void animateIn(){
+    if(y < targetY){
+    y+=speed;  
+  }
+}     
+   void animateOut(){
+      if(y > startY){
+      y-=speed;
+    }
+  }
+}
